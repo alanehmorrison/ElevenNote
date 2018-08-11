@@ -11,8 +11,8 @@ namespace ElevenNote.Services
     public class NoteService
     {
         private readonly Guid _userId;
-        
-         public NoteService(Guid userId)
+
+        public NoteService(Guid userId)
         {
             _userId = userId;
         }
@@ -25,10 +25,10 @@ namespace ElevenNote.Services
                     OwnerID = _userId,
                     Title = model.Title,
                     Content = model.Content,
-                    CreatedUTC = DateTimeOffset.Now
+                    CreatedUtc = DateTimeOffset.Now
                 };
 
-             using (var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 ctx.Notes.Add(entity);
                 return ctx.SaveChanges() == 1;
@@ -49,11 +49,11 @@ namespace ElevenNote.Services
                                 {
                                     NoteId = e.NoteID,
                                     Title = e.Title,
-                                    CreatedUTC = e.CreatedUTC
+                                    CreatedUTC = e.CreatedUtc
                                 }
                         );
-                
-                 return query.ToArray();
+
+                return query.ToArray();
             }
         }
 
@@ -71,9 +71,26 @@ namespace ElevenNote.Services
                     NoteId = entity.NoteID,
                     Title = entity.Title,
                     Content = entity.Content,
-                    CreatedUtc = entity.CreatedUTC,
+                    CreatedUtc = entity.CreatedUtc,
                     ModifiedUtc = entity.MotifiedUtc
                 };
+            }
+        }
+
+        public bool UpdateNote(NoteEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Notes
+                        .Single(e => e.NoteID == model.NoteId && e.OwnerID == _userId);
+
+                entity.Title = model.Title;
+                entity.Content = model.Content;
+                entity.MotifiedUtc = DateTimeOffset.UtcNow;
+
+                return ctx.SaveChanges() == 1;
             }
         }
     }
