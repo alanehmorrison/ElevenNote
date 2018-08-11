@@ -63,5 +63,4 @@ namespace ElevenNot.Data
             HasKey(iur => iur.RoleId);
         }
     }
-
 }
