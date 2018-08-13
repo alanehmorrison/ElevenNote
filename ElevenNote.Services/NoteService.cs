@@ -103,12 +103,10 @@ namespace ElevenNote.Services
                         .Notes
                         .Single(e => e.NoteID == noteId && e.OwnerID == _userId);
                 
-         ctx.Notes.Remove(entity);
+                ctx.Notes.Remove(entity);
                 
-         return ctx.SaveChanges() == 1;
+                return ctx.SaveChanges() == 1;
             }
         }
-
-
     }
 }
