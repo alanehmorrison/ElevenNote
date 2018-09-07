@@ -18,7 +18,7 @@ namespace ElevenNot.Data
         public string Content { get; set; }
 
         [Required]
-        public DateTimeOffset CreatedUtc { get; set; }
+        public DateTimeOffset CreatedUTC { get; set; }
 
         public DateTimeOffset? MotifiedUtc { get; set; }
     }

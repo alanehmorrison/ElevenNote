@@ -19,7 +19,7 @@ namespace ElevenNote.Data.Migrations
         {
             var notes = new List<Note>
             {
-                new Note{Title = "Eat", Content = "Pizza Tonight", OwnerID = Guid.NewGuid(), CreatedUtc = new DateTimeOffset()}
+                new Note{Title = "Eat", Content = "Pizza Tonight", OwnerID = Guid.NewGuid(), CreatedUTC = new DateTimeOffset()}
             };
             //  This method will be called after migrating to the latest version.
 
